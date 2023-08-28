@@ -16,23 +16,23 @@ pipeline {
             }
         }
 
-        stage('Stop Docker Container') {
-            steps {
-                script {
-                    // Sử dụng Docker CLI để dừng container
-                    sh "sudo docker stop ${DOCKER_CONTAINER_NAME}"
-                }
-            }
-        }
+        // stage('Stop Docker Container') {
+        //     steps {
+        //         script {
+        //             // Sử dụng Docker CLI để dừng container
+        //             sh "sudo docker stop ${DOCKER_CONTAINER_NAME}"
+        //         }
+        //     }
+        // }
 
-        stage('Clean Up Docker Images') {
-            steps {
-                script {
-                    // Sử dụng Docker CLI để xóa Docker image
-                    sh "sudo docker rmi ${DOCKER_IMAGE} -f"
-                }
-            }
-        }
+        // stage('Clean Up Docker Images') {
+        //     steps {
+        //         script {
+        //             // Sử dụng Docker CLI để xóa Docker image
+        //             sh "sudo docker rmi ${DOCKER_IMAGE} "
+        //         }
+        //     }
+        // }
 
         stage('Build Docker Image') {
             steps {
@@ -47,7 +47,7 @@ pipeline {
             steps {
                 script {
                     // Chạy container từ Docker image đã xây dựng
-                    sh "sudo docker run -itd --rm --name $DOCKER_CONTAINER_NAME -p 80:80 ${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}"
+                    sh "sudo docker run -itd --rm --name ${DOCKER_CONTAINER_NAME} -p 80:80 ${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}"
                 }
             }
         }
