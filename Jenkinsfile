@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     // Sử dụng Docker CLI để dừng container
-                    sh "sudo docker stop $DOCKER_CONTAINER_NAME"
+                    sh "sudo docker stop ${DOCKER_CONTAINER_NAME}"
                 }
             }
         }
@@ -29,7 +29,7 @@ pipeline {
             steps {
                 script {
                     // Sử dụng Docker CLI để xóa Docker image
-                    sh "sudo docker rmi $DOCKER_IMAGE -f"
+                    sh "sudo docker rmi ${DOCKER_IMAGE} -f"
                 }
             }
         }
@@ -47,7 +47,7 @@ pipeline {
             steps {
                 script {
                     // Chạy container từ Docker image đã xây dựng
-                    sh "sudo docker run -itd --name $DOCKER_CONTAINER_NAME -p 80:80 ${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}"
+                    sh "sudo docker run -itd --rm --name $DOCKER_CONTAINER_NAME -p 80:80 ${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}"
                 }
             }
         }
